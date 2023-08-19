@@ -45,7 +45,7 @@ app.post('/parse-expenso-file', upload.single('file'), async (req, res) => {
     try {
         const dataBuffer = fs.readFileSync(req.file.path);
         const data = await pdf(dataBuffer);
-        const dataArr = data.text?.split('\n');
+        const dataArr = data.text?.split('\n').filter(line => line.trim());
         if (req.body.category === 'expenses' && req.body.type === 'search') {
             result = convertExpSearchDataToJson(dataArr);
         } else if (req.body.category === 'expenses' && req.body.type === 'categories') {
@@ -56,8 +56,12 @@ app.post('/parse-expenso-file', upload.single('file'), async (req, res) => {
         return res.send(result);
     } catch (err) {
         console.error("Error Occured while parsing data!", err);
-        return res.status(500).send({result, error: `Something Went Wrong! ${err.message}`});
+        return res.status(500).send({ result, error: `Something Went Wrong! ${err.message}` });
     }
+})
+
+app.use('*', (req, res) => {
+    return res.redirect('/');
 })
 
 app.use((err, req, res, next) => {
@@ -65,7 +69,7 @@ app.use((err, req, res, next) => {
     return res.status(500).send({ error: err.message, code: err.code || 400 });
 })
 
-const PORT = 8060;
+const PORT = process.env.PORT || 8060;
 app.listen(PORT, () => {
     console.log(`server is running.`);
 })

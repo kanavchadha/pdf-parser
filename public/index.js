@@ -52,8 +52,12 @@ const uploadFile = async () => {
         alert('No File Selected! Please select any valid file.');
         return;
     }
-    if(!category.value || !type.value){
-        alert('Please select any valid inputs.');
+    if(!category.value){
+        alert('Please select any valid file category.');
+        return;
+    }
+    if(category.value === 'expenses' && !type.value){
+        alert('Please select any valid file type.');
         return;
     }
     try {
