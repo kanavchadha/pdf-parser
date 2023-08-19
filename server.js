@@ -40,7 +40,7 @@ app.get('/', async (req, res) => {
     return res.sendFile(__dirname + '/index.html');
 })
 
-app.post('/parse-file', upload.single('file'), async (req, res) => {
+app.post('/parse-expenso-file', upload.single('file'), async (req, res) => {
     let result = [];
     try {
         const dataBuffer = fs.readFileSync(req.file.path);

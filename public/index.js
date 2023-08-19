@@ -62,7 +62,7 @@ const uploadFile = async () => {
         data.append('file', fileInput.files[0]);
         data.append('category', category.value);
         data.append('type', type.value);
-        const res = await fetch('/parse-file', {
+        const res = await fetch('/parse-expenso-file', {
             method: 'POST',
             headers: {
                 Accept: "application/json",
