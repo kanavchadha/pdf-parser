@@ -23,27 +23,39 @@ dropContainer.addEventListener("drop", (e) => {
     e.preventDefault()
     dropContainer.classList.remove("drag-active")
     if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
-        if(e.dataTransfer.files[0].type !== 'application/pdf'){
+        if (e.dataTransfer.files[0].type !== 'application/pdf') {
+            category.style.display = 'none';
+            type.style.display = 'none';
             return alert('Please select a valid pdf file');
         }
         category.style.display = 'block';
     } else {
         category.style.display = 'none';
+        type.style.display = 'none';
     }
     fileInput.files = e.dataTransfer.files
 })
 
 fileInput.addEventListener('change', (e) => {
     if (e.target.files && e.target.files.length > 0) {
+        if (e.target.files[0].type !== 'application/pdf') {
+            fileInput.value = '';
+            category.style.display = 'none';
+            type.style.display = 'none';
+            return alert('Please select a valid pdf file');
+        }
         category.style.display = 'block';
     } else {
         category.style.display = 'none';
+        type.style.display = 'none';
     }
 })
 
 category.addEventListener('change', (e) => {
     if (e.target.value === 'expenses') {
         type.style.display = 'block';
+    } else {
+        type.style.display = 'none';
     }
 })
 
@@ -52,11 +64,11 @@ const uploadFile = async () => {
         alert('No File Selected! Please select any valid file.');
         return;
     }
-    if(!category.value){
+    if (!category.value) {
         alert('Please select any valid file category.');
         return;
     }
-    if(category.value === 'expenses' && !type.value){
+    if (category.value === 'expenses' && !type.value) {
         alert('Please select any valid file type.');
         return;
     }
@@ -74,8 +86,8 @@ const uploadFile = async () => {
             body: data
         });
         const parsedData = await res.json();
-        if(parsedData.error){
-            throw new Error(parsedData.error);   
+        if (parsedData.error) {
+            throw new Error(parsedData.error);
         }
         loader.classList.remove('active');
         code.innerText = JSON.stringify(parsedData, null, 4);
