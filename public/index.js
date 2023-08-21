@@ -60,6 +60,7 @@ category.addEventListener('change', (e) => {
 })
 
 const uploadFile = async () => {
+    codeContainer.style.display = 'none';
     if (!fileInput.files || fileInput.files.length <= 0) {
         alert('No File Selected! Please select any valid file.');
         return;
@@ -80,9 +81,6 @@ const uploadFile = async () => {
         data.append('type', type.value);
         const res = await fetch('/parse-expenso-file', {
             method: 'POST',
-            headers: {
-                Accept: "application/json",
-            },
             body: data
         });
         const parsedData = await res.json();
@@ -94,7 +92,7 @@ const uploadFile = async () => {
         codeContainer.style.display = 'block';
     } catch (error) {
         loader.classList.remove('active');
-        alert('Something Went Wrong! ' + error.message);
+        alert('Something Went Wrong! Please Try again with downloading file on your local system. ' + error.message);
     }
 }
 

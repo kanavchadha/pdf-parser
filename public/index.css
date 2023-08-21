@@ -23,7 +23,7 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin: 25px;
+    margin: 25px 20px;
 	padding: 0;
     font-family: 'Dai Banna SIL', serif;
     background-image: linear-gradient(-225deg, #feffff 0%, #d1fce6 100%);
@@ -38,7 +38,7 @@ h1 {
     font-size: bold;
     font-size: 3.6rem;
     color: #0da575;
-    text-shadow: 1px 2px 2px rgba(0, 0, 0, 0.3);
+    text-shadow: 1px 2px 3px rgba(0, 0, 0, 0.3);
 }
 
 input[type=file] {
@@ -114,7 +114,7 @@ select:hover {
     height: auto;
     width: 100%;
     max-width: 450px;
-    padding: 20px;
+    padding: 20px 10px;
     border-radius: 10px;
     border: 2px dashed #0da575;
     cursor: pointer;
@@ -152,14 +152,14 @@ select:hover {
     display: none;
     margin-top: 50px;
     padding: 10px;
+	width: 100%;
+    max-width: 650px;
 }
 
 .code-container {
     border: 2px solid black;
     background-color: #222;
     height: auto;
-    width: 100%;
-    max-width: 650px;
     font-family: 'Courier New', Courier, monospace;
     font-size: 1rem;
     color: #fff;
@@ -170,6 +170,7 @@ select:hover {
 
 pre {
     padding: 10px;
+	width: 100%;
 }
 
 .code-header {
