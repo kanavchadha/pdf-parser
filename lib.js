@@ -94,7 +94,7 @@ module.exports.convertInvDataToJson = (dataArr) => {
             line = dataArr[i];
             const time = line.split('Time Period:'), isActive = line.split('Status:');
             if (isActive && isActive.length > 1) { // extracting status
-                doc.isActive = isActive[1].trim() === 'Active' ? true : false;
+                doc.isActive = isActive[1].trim() === 'Active' ? 'true' : 'false';
             }
             if (time && time.length > 1) { // extracting timePeriod
                 doc.timePeriod = getNumberFromStringStarting(time[1].trim());
